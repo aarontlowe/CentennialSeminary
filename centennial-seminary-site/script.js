@@ -23,10 +23,12 @@ const weeks = [
 const announcements = [
   { date: "Sept 7", title: "Labor Day", details: "CCSD has no school." },
   { date: "Sept 21", title: "Staff Development Day", details: "CCSD has no school." },
+  { date: "Oct 26", title: "Doctrinal Mastery Village", details: "Special seminary day." },
   { date: "Oct 30", title: "Nevada Day", details: "CCSD has no school." },
   { date: "Nov 3", title: "Election Day", details: "CCSD has no school." },
   { date: "Nov 11", title: "Veterans Day", details: "CCSD has no school." },
   { date: "Nov 25-27", title: "Thanksgiving Break", details: "CCSD has no school." },
+  { date: "Dec 10", title: "Seminary Breakfast", details: "Come hungry" },
 ];
 
 const studentManualBase = "https://www.churchofjesuschrist.org/study/manual/old-testament-seminary-student-manual-2026/";
