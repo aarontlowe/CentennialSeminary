@@ -130,6 +130,7 @@ const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.getElementById("siteNavLinks");
 navToggle.addEventListener("click", () => { const open = navLinks.classList.toggle("is-open"); navToggle.setAttribute("aria-expanded", String(open)); });
 navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { navLinks.classList.remove("is-open"); navToggle.setAttribute("aria-expanded", "false"); }));
+document.getElementById("backToTop").addEventListener("click", (event) => { event.preventDefault(); window.scrollTo({ top:0, behavior:"smooth" }); });
 
 function composeMakeup(payload) { return [`Student Name: ${payload.studentName}`, `Student Email: ${payload.studentEmail}`, `Class: ${payload.classPeriod}`, `Lesson: ${payload.lessonWeek}`, "", "What I learned:", payload.learningResponse, "", "How this helps me come closer to Jesus Christ:", payload.christResponse].join("\n"); }
 function openMailto(recipient, subject, body) { window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }
