@@ -114,14 +114,23 @@ setInterval(updateNextLesson, 30000);
 
 document.getElementById("announcementsGrid").innerHTML = announcements.map((item) => `<article class="announcement-card"><p class="announcement-card__date">${item.date}</p><h3>${item.title}</h3><p>${item.details}</p></article>`).join("");
 document.getElementById("calendarGrid").innerHTML = weeks.map((week) => `<article class="calendar-card"><p class="calendar-card__week">${week.label} · ${week.dateRange}</p><h3>${week.reading}</h3><ul>${week.lessons.map((lesson) => lesson.startsWith("No school") ? `<li class="no-school">${lesson}</li>` : `<li>${lessonLinkMarkup(lesson)}</li>`).join("")}</ul></article>`).join("");
-document.getElementById("lessonWeekSelect").innerHTML = `<option value="">Select a lesson week</option>${weeks.map((week) => `<option value="${week.label} (${week.dateRange})">${week.label} - ${week.dateRange}: ${week.reading}</option>`).join("")}`;
+function makeupDate(isoDate) {
+  const [, month, day] = isoDate.split("-");
+  return `${month}/${day}`;
+}
+
+const makeupLessons = lessonSchedule.flatMap(({ date, lesson }) => {
+    const description = lesson.replace(/^Lessons?\s+\d+(?:\s*[\/&]\s*\d+)*\s*-\s*/i, "");
+    return lessonNumbers(lesson).map((number) => ({ date:makeupDate(date), number, description }));
+  });
+document.getElementById("lessonSelect").innerHTML = `<option value="">Select a lesson</option>${makeupLessons.map(({ date, number, description }) => `<option value="${date} — Lesson ${number} - ${description}">${date} — Lesson ${number} - ${description}</option>`).join("")}`;
 
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.getElementById("siteNavLinks");
 navToggle.addEventListener("click", () => { const open = navLinks.classList.toggle("is-open"); navToggle.setAttribute("aria-expanded", String(open)); });
 navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { navLinks.classList.remove("is-open"); navToggle.setAttribute("aria-expanded", "false"); }));
 
-function composeMakeup(payload) { return [`Student Name: ${payload.studentName}`, `Student Email: ${payload.studentEmail}`, `Class Period: ${payload.classPeriod}`, `Lesson Week: ${payload.lessonWeek}`, "", "What I learned:", payload.learningResponse, "", "How this helps me come closer to Jesus Christ:", payload.christResponse].join("\n"); }
+function composeMakeup(payload) { return [`Student Name: ${payload.studentName}`, `Student Email: ${payload.studentEmail}`, `Class Period: ${payload.classPeriod}`, `Lesson: ${payload.lessonWeek}`, "", "What I learned:", payload.learningResponse, "", "How this helps me come closer to Jesus Christ:", payload.christResponse].join("\n"); }
 function openMailto(recipient, subject, body) { window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }
 document.getElementById("makeupForm").addEventListener("submit", async (event) => { event.preventDefault(); const status = document.getElementById("makeupStatus"); const payload = Object.fromEntries(new FormData(event.currentTarget)); status.textContent = "Submitting makeup work…"; try { const response = await fetch("/.netlify/functions/submit-makeup", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) }); if (!response.ok) throw new Error(); status.textContent = "Makeup work submitted successfully."; event.currentTarget.reset(); } catch { status.textContent = "Opening an email draft to finish your submission."; openMailto("admin@centennialseminary.com", `Seminary Makeup Work - ${payload.studentName}`, composeMakeup(payload)); } });
 document.getElementById("contactForm").addEventListener("submit", async (event) => { event.preventDefault(); const status = document.getElementById("contactStatus"); const payload = Object.fromEntries(new FormData(event.currentTarget)); status.textContent = "Sending your message…"; try { const response = await fetch("/.netlify/functions/submit-contact", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) }); if (!response.ok) throw new Error(); status.textContent = "Your message was sent."; event.currentTarget.reset(); } catch { status.textContent = "Opening an email draft to finish your message."; openMailto("admin@centennialseminary.com", `Centennial Seminary message from ${payload.name}`, `Name: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`); } });
