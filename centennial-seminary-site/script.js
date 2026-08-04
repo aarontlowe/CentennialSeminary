@@ -18,7 +18,6 @@ const weeks = [
   ["2026-11-30", "Nov 30-Dec 4", "Week 17", "Micah; Nahum; Habakkuk; Zephaniah", ["Lesson 152 - Micah", "Lesson 191 - Finding a Mentor", "Lesson 153 - Habakkuk", "Lesson 154 - Doctrinal Mastery Practice 10"]],
   ["2026-12-07", "Dec 7-11", "Week 18", "Haggai 1-2; Zechariah 1-4; 7-14", ["Lesson 195 - Overcoming Procrastination", "Lesson 160 - Assess Your Learning 10", "Lesson 155 - Haggai", "Lessons 156/157 - Zechariah 1-8 and Zechariah 7-14"]],
   ["2026-12-14", "Dec 14-18", "Week 19", "Malachi", ["Lessons 158/159 - Malachi 3 and Malachi 4", "Lesson 187 - Developing Healthy Habits", "Finals"]],
-  ["2026-12-21", "Dec 21-27", "Week 20", "Joshua 1-8; 23-24", ["Lessons 61/62 - Joshua 1 and Joshua 2-4", "Lesson 63 - Joshua 23-24", "Lesson 67 - Assess Your Learning 4", "Lesson 176 - Accepting and Fulfilling Callings"]],
 ].map(([start, dateRange, label, reading, lessons]) => ({ start, dateRange, label, reading, lessons }));
 
 const announcements = [
