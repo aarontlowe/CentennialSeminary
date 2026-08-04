@@ -1,4 +1,4 @@
-const RECIPIENT = "attendance@centennialseminary.com";
+const RECIPIENT = "admin@centennialseminary.com";
 
 const escapeHtml = (value) => String(value || "").replace(/[&<>'"]/g, (character) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", "'":"&#39;", '"':"&quot;" })[character]);
 
