@@ -99,6 +99,10 @@ function pacificNow() {
 
 const lessonSchedule = buildLessonSchedule();
 const weekTitle = document.getElementById("weekTitle");
+const calendarPanel = document.getElementById("calendarPanel");
+const calendarToggle = document.getElementById("calendarToggle");
+const teachersPanel = document.getElementById("teachersPanel");
+const teachersToggle = document.getElementById("teachersToggle");
 
 function updateNextLesson() {
   const now = pacificNow();
@@ -131,6 +135,45 @@ const navLinks = document.getElementById("siteNavLinks");
 navToggle.addEventListener("click", () => { const open = navLinks.classList.toggle("is-open"); navToggle.setAttribute("aria-expanded", String(open)); });
 navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { navLinks.classList.remove("is-open"); navToggle.setAttribute("aria-expanded", "false"); }));
 document.getElementById("backToTop").addEventListener("click", (event) => { event.preventDefault(); window.scrollTo({ top:0, behavior:"smooth" }); });
+
+function setPanelState(panel, toggle, expanded, labels) {
+  panel.classList.toggle("is-collapsed", !expanded);
+  toggle.setAttribute("aria-expanded", String(expanded));
+  toggle.textContent = expanded ? labels.hide : labels.show;
+}
+
+function expandPanel(panel, toggle, labels) {
+  setPanelState(panel, toggle, true, labels);
+}
+
+function togglePanel(panel, toggle, labels) {
+  const expanded = toggle.getAttribute("aria-expanded") !== "true";
+  setPanelState(panel, toggle, expanded, labels);
+}
+
+const calendarPanelLabels = { show: "Show Pacing Guide", hide: "Hide Pacing Guide" };
+const teachersPanelLabels = { show: "Show Teachers & Administration", hide: "Hide Teachers & Administration" };
+
+calendarToggle.addEventListener("click", () => togglePanel(calendarPanel, calendarToggle, calendarPanelLabels));
+teachersToggle.addEventListener("click", () => togglePanel(teachersPanel, teachersToggle, teachersPanelLabels));
+
+function expandSectionFromHash(hash) {
+  if (hash === "#calendar") {
+    expandPanel(calendarPanel, calendarToggle, calendarPanelLabels);
+  }
+  if (hash === "#teachers") {
+    expandPanel(teachersPanel, teachersToggle, teachersPanelLabels);
+  }
+}
+
+document.querySelectorAll('.site-nav__links a[href="#calendar"], .site-nav__links a[href="#teachers"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    expandSectionFromHash(link.getAttribute("href"));
+  });
+});
+
+window.addEventListener("hashchange", () => expandSectionFromHash(window.location.hash));
+expandSectionFromHash(window.location.hash);
 
 function composeMakeup(payload) { return [`Student Name: ${payload.studentName}`, `Student Email: ${payload.studentEmail}`, `Class: ${payload.classPeriod}`, `Lesson: ${payload.lessonWeek}`, "", "What I learned:", payload.learningResponse, "", "How this helps me come closer to Jesus Christ:", payload.christResponse].join("\n"); }
 function openMailto(recipient, subject, body) { window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }

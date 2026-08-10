@@ -101,25 +101,36 @@
     <section class="section section--image" id="teachers">
       <div class="container section-heading">
         <div><p class="eyebrow">Teachers and Administration</p><h2>Meet the people who serve our seminary students.</h2></div>
+        <button class="button button--panel" type="button" id="teachersToggle" aria-expanded="false" aria-controls="teachersPanel">Show Teachers &amp; Administration</button>
       </div>
-      <div class="container people-group" id="administrators">
-        <h3 class="people-group__title">Administrators</h3>
-        <div class="profile-grid" id="administratorsGrid">
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--minette" src="assets/images/teachers/minette-morata.jpeg" alt="Minette Morata"><h3>Minette Morata</h3><p>Seminary Supervisor</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--julie" src="assets/images/teachers/julie-young.jpeg" alt="Julie Young"><h3>Julie Young</h3><p>Seminary Supervisor</p></article>
+      <div class="collapsible-panel is-collapsed" id="teachersPanel">
+        <div class="container people-group" id="administrators">
+          <h3 class="people-group__title">Administrators</h3>
+          <div class="profile-grid" id="administratorsGrid">
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--minette" src="assets/images/teachers/minette-morata.jpeg" alt="Minette Morata"><h3>Minette Morata</h3><p>Seminary Supervisor</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--julie" src="assets/images/teachers/julie-young.jpeg" alt="Julie Young"><h3>Julie Young</h3><p>Seminary Supervisor</p></article>
+          </div>
         </div>
-      </div>
-      <div class="container people-group" id="teachersGroup">
-        <h3 class="people-group__title">Teachers</h3>
-        <div class="profile-grid" id="profilesGrid">
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--albright" src="assets/images/teachers/elaine-and-chris-albright.jpeg" alt="Elaine and Chris Albright"><h3>Elaine and Chris Albright</h3><p>Sophomores &amp; Juniors</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--katie" src="assets/images/teachers/katie-boggess.jpeg" alt="Katie Boggess"><h3>Katie Boggess</h3><p>Sophomores &amp; Juniors</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--tom" src="assets/images/teachers/tom-dillard.jpg" alt="Tom Dillard"><h3>Tom Dillard</h3><p>Seniors</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--eric" src="assets/images/teachers/eric-giles.jpg" alt="Eric Giles"><h3>Eric Giles</h3><p>Seniors</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--tad" src="assets/images/teachers/tad-legas.png" alt="Tad Legas"><h3>Tad Legas</h3><p>Sophomores &amp; Juniors</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--aaron" src="assets/images/teachers/aaron-lowe.jpeg" alt="Aaron Lowe"><h3>Aaron Lowe</h3><p>Sophomores &amp; Juniors</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--sprenz" src="assets/images/teachers/kevin-and-melissa-sprenz.jpeg" alt="Kevin and Melissa Sprenz"><h3>Kevin and Melissa Sprenz</h3><p>Freshmen</p></article>
-          <article class="profile-card"><img class="profile-card__photo profile-card__photo--kirsten" src="assets/images/teachers/kirsten-york.png" alt="Kirsten York"><h3>Kirsten York</h3><p>Freshmen</p></article>
+        <div class="container people-group" id="teachersGroup">
+          <h3 class="people-group__title">Teachers</h3>
+          <div class="profile-grid" id="profilesGrid">
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--albright" src="assets/images/teachers/elaine-and-chris-albright.jpeg" alt="Elaine and Chris Albright"><h3>Elaine and Chris Albright</h3><p>Sophomores &amp; Juniors</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--katie" src="assets/images/teachers/katie-boggess.jpeg" alt="Katie Boggess"><h3>Katie Boggess</h3><p>Sophomores &amp; Juniors</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--christy" src="assets/images/teachers/christy-longo.jpg" alt="Christy Longo"><h3>Christy Longo</h3><p>Sophomores &amp; Juniors</p></article>
+            <article class="profile-card"><div class="profile-card__photo profile-card__photo--placeholder" aria-label="No photo available">No photo available</div><h3>Litany Rosequist</h3><p>Freshmen</p></article>
+            <article class="profile-card"><div class="profile-card__photo profile-card__photo--placeholder" aria-label="No photo available">No photo available</div><h3>Hannah Craner</h3><p>Freshmen</p></article>
+            <article class="profile-card"><div class="profile-card__photo profile-card__photo--placeholder" aria-label="No photo available">No photo available</div><h3>Kristie Heaton</h3><p>Freshmen</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--tom" src="assets/images/teachers/tom-dillard.jpg" alt="Tom Dillard"><h3>Tom Dillard</h3><p>Seniors</p></article>
+            <article class="profile-card"><div class="profile-card__photo profile-card__photo--placeholder" aria-label="No photo available">No photo available</div><h3>Dan Hickman</h3><p>Seniors</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--eric" src="assets/images/teachers/eric-giles.jpg" alt="Eric Giles"><h3>Eric Giles</h3><p>Seniors</p></article>
+            <article class="profile-card"><div class="profile-card__photo profile-card__photo--placeholder" aria-label="No photo available">No photo available</div><h3>Matt Schriever</h3><p>Seniors</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--tad" src="assets/images/teachers/tad-legas.png" alt="Tad Legas"><h3>Tad Legas</h3><p>Sophomores &amp; Juniors</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--aaron" src="assets/images/teachers/aaron-lowe.jpeg" alt="Aaron Lowe"><h3>Aaron Lowe</h3><p>Sophomores &amp; Juniors</p></article>
+            <article class="profile-card"><div class="profile-card__photo profile-card__photo--placeholder" aria-label="No photo available">No photo available</div><h3>Tyson Williams</h3><p>Sophomores &amp; Juniors</p></article>
+            <article class="profile-card"><div class="profile-card__photo profile-card__photo--placeholder" aria-label="No photo available">No photo available</div><h3>Greg Lish</h3><p>Sophomores &amp; Juniors</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--sprenz" src="assets/images/teachers/kevin-and-melissa-sprenz.jpeg" alt="Kevin and Melissa Sprenz"><h3>Kevin and Melissa Sprenz</h3><p>Freshmen</p></article>
+            <article class="profile-card"><img class="profile-card__photo profile-card__photo--kirsten" src="assets/images/teachers/kirsten-york.png" alt="Kirsten York"><h3>Kirsten York</h3><p>Freshmen</p></article>
+          </div>
         </div>
       </div>
     </section>
@@ -198,9 +209,12 @@
           <p class="eyebrow eyebrow--dark">Full Pacing Guide</p>
           <h2>Old Testament, Part 2</h2>
         </div>
+        <button class="button button--panel" type="button" id="calendarToggle" aria-expanded="false" aria-controls="calendarPanel">Show Pacing Guide</button>
       </div>
-      <div class="container">
-        <div class="calendar-grid" id="calendarGrid" aria-live="polite"></div>
+      <div class="collapsible-panel is-collapsed" id="calendarPanel">
+        <div class="container">
+          <div class="calendar-grid" id="calendarGrid" aria-live="polite"></div>
+        </div>
       </div>
     </section>
   </main>
