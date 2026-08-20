@@ -23,6 +23,7 @@ const weeks = [
 const announcements = [
   { date: "Sept 7", title: "Labor Day", details: "CCSD has no school." },
   { date: "Sept 21", title: "Staff Development Day", details: "CCSD has no school." },
+  { date: "Oct 15", title: "Morningside", details: "Special seminary gathering." },
   { date: "Oct 26", title: "Doctrinal Mastery Village", details: "Special seminary day." },
   { date: "Oct 30", title: "Nevada Day", details: "CCSD has no school." },
   { date: "Nov 3", title: "Election Day", details: "CCSD has no school." },
@@ -101,6 +102,10 @@ const lessonSchedule = buildLessonSchedule();
 const weekTitle = document.getElementById("weekTitle");
 const calendarPanel = document.getElementById("calendarPanel");
 const calendarToggle = document.getElementById("calendarToggle");
+const readingListPanel = document.getElementById("readingListPanel");
+const readingListToggle = document.getElementById("readingListToggle");
+const doctrinalMasteryPanel = document.getElementById("doctrinalMasteryPanel");
+const doctrinalMasteryToggle = document.getElementById("doctrinalMasteryToggle");
 const teachersPanel = document.getElementById("teachersPanel");
 const teachersToggle = document.getElementById("teachersToggle");
 
@@ -130,6 +135,70 @@ const makeupLessons = lessonSchedule.flatMap(({ date, lesson }) => {
   });
 document.getElementById("lessonSelect").innerHTML = `<option value="">Select a lesson</option>${makeupLessons.map(({ date, number, description }) => `<option value="${date} — Lesson ${number} - ${description}">${date} — Lesson ${number} - ${description}</option>`).join("")}`;
 
+const doctrinalMasteryCourses = [
+  ["Old Testament", [
+    ["Moses 1:39", "pgp/moses/1", "p39"], ["Moses 7:18", "pgp/moses/7", "p18"], ["Abraham 2:9–11", "pgp/abr/2", "p9"], ["Abraham 3:22–23", "pgp/abr/3", "p22"],
+    ["Genesis 1:26–27", "ot/gen/1", "p26"], ["Genesis 2:24", "ot/gen/2", "p24"], ["Genesis 39:9", "ot/gen/39", "p9"], ["Exodus 20:3–17", "ot/ex/20", "p3"],
+    ["Joshua 24:15", "ot/josh/24", "p15"], ["Psalm 24:3–4", "ot/ps/24", "p3"], ["Proverbs 3:5–6", "ot/prov/3", "p5"], ["Isaiah 1:18", "ot/isa/1", "p18"],
+    ["Isaiah 5:20", "ot/isa/5", "p20"], ["Isaiah 29:13–14", "ot/isa/29", "p13"], ["Isaiah 53:3–5", "ot/isa/53", "p3"], ["Isaiah 58:6–7", "ot/isa/58", "p6"],
+    ["Isaiah 58:13–14", "ot/isa/58", "p13"], ["Jeremiah 1:4–5", "ot/jer/1", "p4"], ["Ezekiel 3:16–17", "ot/ezek/3", "p16"], ["Ezekiel 37:15–17", "ot/ezek/37", "p15"],
+    ["Daniel 2:44–45", "ot/dan/2", "p44"], ["Amos 3:7", "ot/amos/3", "p7"], ["Malachi 3:8–10", "ot/mal/3", "p8"], ["Malachi 4:5–6", "ot/mal/4", "p5"]
+  ]],
+  ["New Testament", [
+    ["Matthew 5:14–16", "nt/matt/5", "p14"], ["Matthew 11:28–30", "nt/matt/11", "p28"], ["Matthew 16:15–19", "nt/matt/16", "p15"], ["Matthew 22:36–39", "nt/matt/22", "p36"],
+    ["Luke 2:10–12", "nt/luke/2", "p10"], ["Luke 22:19–20", "nt/luke/22", "p19"], ["Luke 24:36–39", "nt/luke/24", "p36"], ["John 3:5", "nt/john/3", "p5"],
+    ["John 3:16", "nt/john/3", "p16"], ["John 7:17", "nt/john/7", "p17"], ["John 17:3", "nt/john/17", "p3"], ["1 Corinthians 6:19–20", "nt/1-cor/6", "p19"],
+    ["1 Corinthians 11:11", "nt/1-cor/11", "p11"], ["1 Corinthians 15:20–22", "nt/1-cor/15", "p20"], ["1 Corinthians 15:40–42", "nt/1-cor/15", "p40"], ["Ephesians 1:10", "nt/eph/1", "p10"],
+    ["Ephesians 2:19–20", "nt/eph/2", "p19"], ["2 Thessalonians 2:1–3", "nt/2-thes/2", "p1"], ["2 Timothy 3:15–17", "nt/2-tim/3", "p15"], ["Hebrews 12:9", "nt/heb/12", "p9"],
+    ["James 1:5–6", "nt/james/1", "p5"], ["James 2:17–18", "nt/james/2", "p17"], ["1 Peter 4:6", "nt/1-pet/4", "p6"], ["Revelation 20:12", "nt/rev/20", "p12"]
+  ]],
+  ["Book of Mormon", [
+    ["1 Nephi 3:7", "bofm/1-ne/3", "p7"], ["2 Nephi 2:25", "bofm/2-ne/2", "p25"], ["2 Nephi 2:27", "bofm/2-ne/2", "p27"], ["2 Nephi 26:33", "bofm/2-ne/26", "p33"],
+    ["2 Nephi 28:30", "bofm/2-ne/28", "p30"], ["2 Nephi 32:3", "bofm/2-ne/32", "p3"], ["2 Nephi 32:8–9", "bofm/2-ne/32", "p8"], ["Mosiah 2:17", "bofm/mosiah/2", "p17"],
+    ["Mosiah 2:41", "bofm/mosiah/2", "p41"], ["Mosiah 3:19", "bofm/mosiah/3", "p19"], ["Mosiah 4:9", "bofm/mosiah/4", "p9"], ["Mosiah 18:8–10", "bofm/mosiah/18", "p8"],
+    ["Alma 7:11–13", "bofm/alma/7", "p11"], ["Alma 34:9–10", "bofm/alma/34", "p9"], ["Alma 39:9", "bofm/alma/39", "p9"], ["Alma 41:10", "bofm/alma/41", "p10"],
+    ["Helaman 5:12", "bofm/hel/5", "p12"], ["3 Nephi 11:10–11", "bofm/3-ne/11", "p10"], ["3 Nephi 12:48", "bofm/3-ne/12", "p48"], ["3 Nephi 27:20", "bofm/3-ne/27", "p20"],
+    ["Ether 12:6", "bofm/ether/12", "p6"], ["Ether 12:27", "bofm/ether/12", "p27"], ["Moroni 7:45–48", "bofm/moro/7", "p45"], ["Moroni 10:4–5", "bofm/moro/10", "p4"]
+  ]],
+  ["Doctrine and Covenants & Church History", [
+    ["Joseph Smith—History 1:15–20", "pgp/js-h/1", "p15"], ["Doctrine and Covenants 1:30", "dc-testament/dc/1", "p30"], ["Doctrine and Covenants 1:37–38", "dc-testament/dc/1", "p37"], ["Doctrine and Covenants 6:36", "dc-testament/dc/6", "p36"],
+    ["Doctrine and Covenants 8:2–3", "dc-testament/dc/8", "p2"], ["Doctrine and Covenants 13:1", "dc-testament/dc/13", "p1"], ["Doctrine and Covenants 18:10–11", "dc-testament/dc/18", "p10"], ["Doctrine and Covenants 18:15–16", "dc-testament/dc/18", "p15"],
+    ["Doctrine and Covenants 19:16–19", "dc-testament/dc/19", "p16"], ["Doctrine and Covenants 21:4–6", "dc-testament/dc/21", "p4"], ["Doctrine and Covenants 29:10–11", "dc-testament/dc/29", "p10"], ["Doctrine and Covenants 49:15–17", "dc-testament/dc/49", "p15"],
+    ["Doctrine and Covenants 58:42–43", "dc-testament/dc/58", "p42"], ["Doctrine and Covenants 64:9–11", "dc-testament/dc/64", "p9"], ["Doctrine and Covenants 76:22–24", "dc-testament/dc/76", "p22"], ["Doctrine and Covenants 82:10", "dc-testament/dc/82", "p10"],
+    ["Doctrine and Covenants 84:20–22", "dc-testament/dc/84", "p20"], ["Doctrine and Covenants 88:118", "dc-testament/dc/88", "p118"], ["Doctrine and Covenants 89:18–21", "dc-testament/dc/89", "p18"], ["Doctrine and Covenants 107:8", "dc-testament/dc/107", "p8"],
+    ["Doctrine and Covenants 121:36, 41–42", "dc-testament/dc/121", "p36"], ["Doctrine and Covenants 130:22–23", "dc-testament/dc/130", "p22"], ["Doctrine and Covenants 131:1–4", "dc-testament/dc/131", "p1"], ["Doctrine and Covenants 135:3", "dc-testament/dc/135", "p3"]
+  ]]
+];
+
+const oldTestamentDescriptions = {
+  "Moses 1:39": "This is my work and my glory—to bring to pass the immortality and eternal life of man.",
+  "Moses 7:18": "The Lord called his people Zion because they were of one heart and one mind.",
+  "Abraham 2:9–11": "The Lord promised Abraham that his seed would bear this ministry and Priesthood unto all nations.",
+  "Abraham 3:22–23": "As spirits we were organized before the world was.",
+  "Genesis 1:26–27": "God created man in his own image.",
+  "Genesis 2:24": "A man shall cleave unto his wife, and they shall be one.",
+  "Genesis 39:9": "How then can I do this great wickedness, and sin against God?",
+  "Exodus 20:3–17": "The Ten Commandments.",
+  "Joshua 24:15": "Choose you this day whom ye will serve.",
+  "Psalm 24:3–4": "Who shall stand in his holy place? He that hath clean hands, and a pure heart.",
+  "Proverbs 3:5–6": "Trust in the Lord with all thine heart, and he shall direct thy paths.",
+  "Isaiah 1:18": "Though your sins be as scarlet, they shall be as white as snow.",
+  "Isaiah 5:20": "Woe unto them that call evil good, and good evil.",
+  "Isaiah 29:13–14": "The restoration of the gospel is a marvellous work and a wonder.",
+  "Isaiah 53:3–5": "Surely Jesus Christ hath borne our griefs and carried our sorrows.",
+  "Isaiah 58:6–7": "The blessings of a proper fast.",
+  "Isaiah 58:13–14": "Turn away from doing thy pleasure on my holy day, and call the sabbath a delight.",
+  "Jeremiah 1:4–5": "Before I formed thee in the belly, I ordained thee a prophet unto the nations.",
+  "Ezekiel 3:16–17": "The prophet is a watchman unto the house of Israel.",
+  "Ezekiel 37:15–17": "The Bible and the Book of Mormon shall become one in thine hand.",
+  "Daniel 2:44–45": "God shall set up a kingdom, which shall never be destroyed.",
+  "Amos 3:7": "The Lord God revealeth his secret unto his servants the prophets.",
+  "Malachi 3:8–10": "The blessings of paying tithing.",
+  "Malachi 4:5–6": "Elijah shall turn the heart of the children to their fathers."
+};
+
+document.getElementById("doctrinalMasteryGrid").innerHTML = doctrinalMasteryCourses.slice(0, 1).map(([course, passages]) => `<article class="doctrinal-mastery__card"><h3>${course}</h3><ul>${passages.map(([reference, path, verse]) => `<li><a href="https://www.churchofjesuschrist.org/study/scriptures/${path}?lang=eng&id=${verse}#${verse}" target="_blank" rel="noreferrer">${reference}</a><span class="doctrinal-mastery__description">${oldTestamentDescriptions[reference]}</span></li>`).join("")}</ul></article>`).join("");
+
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.getElementById("siteNavLinks");
 navToggle.addEventListener("click", () => { const open = navLinks.classList.toggle("is-open"); navToggle.setAttribute("aria-expanded", String(open)); });
@@ -152,21 +221,31 @@ function togglePanel(panel, toggle, labels) {
 }
 
 const calendarPanelLabels = { show: "Show Pacing Guide", hide: "Hide Pacing Guide" };
+const readingListPanelLabels = { show: "Show Required Reading", hide: "Hide Required Reading" };
+const doctrinalMasteryPanelLabels = { show: "Show Doctrinal Mastery Passages", hide: "Hide Doctrinal Mastery Passages" };
 const teachersPanelLabels = { show: "Show Teachers & Administration", hide: "Hide Teachers & Administration" };
 
 calendarToggle.addEventListener("click", () => togglePanel(calendarPanel, calendarToggle, calendarPanelLabels));
+readingListToggle.addEventListener("click", () => togglePanel(readingListPanel, readingListToggle, readingListPanelLabels));
+doctrinalMasteryToggle.addEventListener("click", () => togglePanel(doctrinalMasteryPanel, doctrinalMasteryToggle, doctrinalMasteryPanelLabels));
 teachersToggle.addEventListener("click", () => togglePanel(teachersPanel, teachersToggle, teachersPanelLabels));
 
 function expandSectionFromHash(hash) {
   if (hash === "#calendar") {
     expandPanel(calendarPanel, calendarToggle, calendarPanelLabels);
   }
+  if (hash === "#reading-list") {
+    expandPanel(readingListPanel, readingListToggle, readingListPanelLabels);
+  }
+  if (hash === "#doctrinal-mastery") {
+    expandPanel(doctrinalMasteryPanel, doctrinalMasteryToggle, doctrinalMasteryPanelLabels);
+  }
   if (hash === "#teachers") {
     expandPanel(teachersPanel, teachersToggle, teachersPanelLabels);
   }
 }
 
-document.querySelectorAll('.site-nav__links a[href="#calendar"], .site-nav__links a[href="#teachers"]').forEach((link) => {
+document.querySelectorAll('.site-nav__links a[href="#reading-list"], .site-nav__links a[href="#calendar"], .site-nav__links a[href="#doctrinal-mastery"], .site-nav__links a[href="#teachers"]').forEach((link) => {
   link.addEventListener("click", () => {
     expandSectionFromHash(link.getAttribute("href"));
   });

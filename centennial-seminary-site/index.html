@@ -20,6 +20,7 @@
       <div class="site-nav__links" id="siteNavLinks">
         <a href="#announcements">Announcements</a>
         <a href="#reading-list">Required Reading</a>
+        <a href="#doctrinal-mastery">Doctrinal Mastery</a>
         <a href="#calendar">Pacing Guide</a>
         <a href="https://myseminary.churchofjesuschrist.org" target="_blank" rel="noreferrer">mySeminary</a>
         <a href="#makeup">Makeup Work</a>
@@ -150,9 +151,12 @@
     </section>
 
     <section class="section required-reading" id="reading-list">
-      <div class="container">
-        <p class="eyebrow">Required Reading List</p>
-        <h2>Scripture reading for the school year</h2>
+      <div class="container section-heading">
+        <div><p class="eyebrow">Required Reading List</p><h2>Scripture reading for the school year</h2></div>
+        <button class="button button--panel" type="button" id="readingListToggle" aria-expanded="false" aria-controls="readingListPanel">Show Required Reading</button>
+      </div>
+      <div class="collapsible-panel is-collapsed" id="readingListPanel">
+        <div class="container">
         <div class="reading-grid">
           <article class="reading-card">
             <h3>Old Testament</h3>
@@ -202,6 +206,17 @@
             </ul></div>
           </article>
         </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--accent doctrinal-mastery" id="doctrinal-mastery">
+      <div class="container section-heading">
+        <div><p class="eyebrow eyebrow--dark">Doctrinal Mastery</p><h2>Old Testament scripture passages</h2></div>
+        <button class="button button--panel" type="button" id="doctrinalMasteryToggle" aria-expanded="false" aria-controls="doctrinalMasteryPanel">Show Doctrinal Mastery Passages</button>
+      </div>
+      <div class="collapsible-panel is-collapsed" id="doctrinalMasteryPanel">
+        <div class="container doctrinal-mastery__grid" id="doctrinalMasteryGrid"></div>
       </div>
     </section>
 
