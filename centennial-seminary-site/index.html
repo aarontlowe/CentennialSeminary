@@ -36,7 +36,10 @@
         <p class="eyebrow eyebrow--dark">Weekly Seminary Message</p>
         <h2 id="weeklyVideoTitle">A message for seminary students</h2>
         <div class="weekly-video__frame">
-          <iframe src="https://www.youtube.com/embed/aVYPEjTiOmo?si=ux7p5SqVv7-8wrI4&amp;rel=0" title="Weekly Seminary Message" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          <video controls preload="metadata" title="Weekly Seminary Message">
+            <source src="assets/videos/weekly-message.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </section>
@@ -86,11 +89,17 @@
             </label>
             <label>Lesson to make up<select name="lessonWeek" id="lessonSelect" required></select></label>
           </div>
-          <label>What did you learn from the reading or assigned resource?
-            <textarea name="learningResponse" rows="7" required placeholder="Write in your own words what you learned and why it matters."></textarea>
+          <label class="makeup-question"><span><strong>What did you learn?</strong> <span class="makeup-question__detail">What is something new or meaningful you learned from the assigned resource? Explain it in your own words and why it matters.</span></span>
+            <textarea name="learnedResponse" rows="6" required></textarea>
           </label>
-          <label>How does this lesson help you come closer to Jesus Christ?
-            <textarea name="christResponse" rows="6" required placeholder="Share a personal reflection or application."></textarea>
+          <label class="makeup-question"><span><strong>What stood out to you?</strong> <span class="makeup-question__detail">Identify a scripture, teaching, story, person, phrase, or idea from the lesson that stood out to you. Why did it catch your attention?</span></span>
+            <textarea name="stoodOutResponse" rows="6" required></textarea>
+          </label>
+          <label class="makeup-question"><span><strong>How does this help you come closer to Jesus Christ?</strong> <span class="makeup-question__detail">What did this lesson teach you about the Savior, His teachings, or His gospel? How could what you learned strengthen your relationship with Him?</span></span>
+            <textarea name="christResponse" rows="6" required></textarea>
+          </label>
+          <label class="makeup-question"><span><strong>How can you use what you learned?</strong> <span class="makeup-question__detail">What is one specific way you could apply something from this lesson in your life? Explain how it could influence one of your choices, attitudes, or actions.</span></span>
+            <textarea name="applicationResponse" rows="6" required></textarea>
           </label>
           <label class="checkbox"><input id="honorStatement" name="honorStatement" type="checkbox" required><span>I completed this work honestly and wrote these responses myself.</span></label>
           <div class="form-actions"><button class="button" id="makeupSubmit" type="submit" disabled>Submit Makeup Work</button><p class="form-status" id="makeupStatus" aria-live="polite"></p></div>
