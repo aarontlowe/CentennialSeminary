@@ -16,3 +16,4 @@
 .lesson-link:hover { color:var(--teal); }
 .week-hero h1 a { color:inherit; text-decoration:none; }
 .week-hero h1 a:hover { color:var(--teal-deep); text-decoration:underline; text-underline-offset:.16em; }
+.section--image .eyebrow { color:#d9f0f2; }
